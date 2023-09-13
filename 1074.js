@@ -1,7 +1,7 @@
 let fs = require('fs');
 
-// let input = fs.readFileSync('1074.txt').toString().trim().split(' ');
-let input = fs.readFileSync('/dev/stdin').toString().trim().split(' ');
+let input = fs.readFileSync('1074.txt').toString().trim().split(' ');
+// let input = fs.readFileSync('/dev/stdin').toString().trim().split(' ');
 let N = input[0];
 let r = input[1];
 let c = input[2];
