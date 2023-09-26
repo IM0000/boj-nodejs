@@ -14,3 +14,9 @@ input.forEach(e=>{
 console.log(N)
 console.log(k)
 console.log(coord)
+
+1, 4, 16, 64 
+2^0,   2^0
+2^0,   2^k-1
+2^k-1, 2^0
+2^k-1, 2^k-1
