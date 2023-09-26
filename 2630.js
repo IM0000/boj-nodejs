@@ -14,7 +14,6 @@ input.forEach(e => {
 let white = 0;
 let blue = 0;
 
-
 // 분할
 function partial(row, col, n) {
   // 최종 조건
