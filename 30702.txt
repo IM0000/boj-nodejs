@@ -1,0 +1,7 @@
+3 3
+AAA
+BBB
+AAA
+CCC
+DDD
+FFF
