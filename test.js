@@ -1,29 +1,38 @@
-const fs = require('fs');
-const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
-const T = Number(input[0]);
-const testCases = input.slice(1);
+const input = require('fs')
+  .readFileSync('input.txt', 'utf-8')
+  .toString()
+  .trim()
+  .split('\n');
 
-for (let test of testCases) {
-  // 6을 9로 변경
-  let digits = test.split('').map((ch) => (ch === '6' ? '9' : ch));
-  // 내림차순 정렬 (숫자로 비교)
-  digits.sort((a, b) => Number(b) - Number(a));
-
-  let s1 = '';
-  let s2 = '';
-  // 각 자릿수를 그리디하게 분배: 두 수 중 작은 값의 뒤에 붙임
-  for (let d of digits) {
-    // 빈 문자열이면 0으로 간주하여 BigInt 비교
-    let num1 = s1 === '' ? 0n : BigInt(s1);
-    let num2 = s2 === '' ? 0n : BigInt(s2);
-    if (num1 <= num2) {
-      s1 += d;
-    } else {
-      s2 += d;
-    }
+const [n, k] = input[0].split(' ').map(Number);
+const road = Array(1000001).fill(0);
+const arr = [];
+let maxX = -1;
+for (let i = 1; i <= n; i++) {
+  let [g, x] = input[i].split(' ').map(Number);
+  if (maxX < x) {
+    maxX = x;
   }
-
-  // 두 수의 곱을 BigInt로 계산
-  const product = BigInt(s1) * BigInt(s2);
-  console.log(product.toString());
+  road[x] = g;
+  arr.push([g, x]);
 }
+
+// 초기 윈도우 합 계산 (예: 0 ~ min(K, maxX))
+let currentSum = 0;
+for (let i = 0; i <= Math.min(k, maxX); i++) {
+  currentSum += road[i];
+}
+let maxSum = currentSum;
+
+for (let i = 1; i <= maxX; i++) {
+  if (i - k - 1 >= 0) {
+    currentSum -= road[i - k - 1];
+  }
+  if (i + k <= maxX) {
+    currentSum += road[i + k];
+  }
+  if (currentSum > maxSum) {
+    maxSum = currentSum;
+  }
+}
+console.log(maxSum);
